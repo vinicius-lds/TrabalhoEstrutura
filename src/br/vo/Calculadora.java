@@ -75,12 +75,16 @@ public class Calculadora {
     public FilaLista<String> gerarExprPosfixada(FilaLista<String> exprlnfixada) {
         
         FilaLista<String> fila = new FilaLista<String>();
-        
+        System.out.println(exprlnfixada.toString());
         while(!exprlnfixada.estaVazia()) {
-            
-            
-            
+            String aux = exprlnfixada.retirar();
+            if(aux.equals("(")){
+                break;
+            }else{
+                System.out.println(aux);
+            }
         }
+        System.out.println(exprlnfixada.toString());
         
         return null;
     }

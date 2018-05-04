@@ -13,12 +13,9 @@ import br.vo.Calculadora;
  */
 public class Apresentacao extends javax.swing.JFrame {
 
-    /**
-     * Creates new form ApresentacaosuperExtraGayGilvan
-     */
     public Apresentacao() {
         initComponents();
-        this.setTitle("Calculadora Super Masculina");
+        this.setTitle("Calculadora");
         this.setResizable(false);
         this.setLocationRelativeTo(null);
     }
@@ -43,7 +40,6 @@ public class Apresentacao extends javax.swing.JFrame {
         tf_expressao.setText("1 + (5(2,5 + (-1) / (2* 5))) -2");
 
         tf_resultado.setEditable(false);
-        tf_resultado.setText("Resultado Super Gay");
 
         btn_calcular.setText("Calcular");
         btn_calcular.addActionListener(new java.awt.event.ActionListener() {

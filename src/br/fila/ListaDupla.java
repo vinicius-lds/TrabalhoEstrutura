@@ -46,20 +46,11 @@ public class ListaDupla<T> {
         System.out.println("}");
     }
     
-    public NoListaDupla<T> buscar(T valor) {
-        NoListaDupla<T> atual = this.primeiro;
-        while (atual != null) {
-            if(atual.getInfo().equals(valor)) {
-                return atual;
-            }
-            atual = atual.getProximo();
-        }
-        return null;
-    }
+    
     
     public void retirar(T info) {
         
-        NoListaDupla<T> noLocalizado = this.buscar(info);
+        NoListaDupla<T> noLocalizado = this.getUltimo();
         
         if(noLocalizado != null) {
             if(!noLocalizado.equals(this.primeiro)) {
