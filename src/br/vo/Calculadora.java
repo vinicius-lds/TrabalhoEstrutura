@@ -2,6 +2,9 @@ package br.vo;
 
 
 import br.fila.FilaLista;
+import br.pilha.PilhaLista;
+import java.awt.List;
+import java.util.regex.Pattern;
 
 /**
  * @author Vinícius Luis da Silva && Carlos Henrique Ponciano da Silva
@@ -73,19 +76,21 @@ public class Calculadora {
     }
     
     public FilaLista<String> gerarExprPosfixada(FilaLista<String> exprlnfixada) {
+        FilaLista<String>  fila   = new FilaLista<>();
+        PilhaLista<String> pilha  = new PilhaLista<>();
+        String aux;
         
-        FilaLista<String> fila = new FilaLista<String>();
-        System.out.println(exprlnfixada.toString());
-        while(!exprlnfixada.estaVazia()) {
-            String aux = exprlnfixada.retirar();
-            if(aux.equals("(")){
+        while (!exprlnfixada.estaVazia()) {            
+            if(exprlnfixada.peek().equals(")")){
+                //aux = exprlnfixada.retirar();
                 break;
+        
             }else{
-                System.out.println(aux);
+                pilha.push(exprlnfixada.retirar());
             }
         }
-        System.out.println(exprlnfixada.toString());
         
+        System.out.println(pilha.toString());
         return null;
     }
     
