@@ -9,8 +9,7 @@ import br.fila.FilaLista;
 import br.vo.Calculadora;
 
 /**
- *
- * @author vinic
+ * @author Carlos Henrique Ponciano da Silva && Vinícius Luis da Silva
  */
 public class Apresentacao extends javax.swing.JFrame {
 

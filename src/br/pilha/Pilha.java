@@ -1,5 +1,8 @@
 package br.pilha;
 
+/**
+ * @author Carlos Henrique Ponciano da Silva && Vinícius Luis da Silva
+ */
 public interface Pilha<T> {
     public void push(T info);    
     public T pop();

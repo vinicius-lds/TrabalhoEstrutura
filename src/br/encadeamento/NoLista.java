@@ -1,15 +1,8 @@
 package br.encadeamento;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 /**
- *
- * @author Administrador
- * @param <T>
+ * @author Carlos Henrique Ponciano da Silva && Vinícius Luis da Silva
  */
 public class NoLista<T> {
     private T info;

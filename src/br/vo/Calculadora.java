@@ -6,7 +6,7 @@ import java.awt.List;
 import java.util.regex.Pattern;
 
 /**
- * @author Vinícius Luis da Silva && Carlos Henrique Ponciano da Silva
+ * @author Carlos Henrique Ponciano da Silva && Vinícius Luis da Silva
  */
 public class Calculadora {
 
@@ -82,8 +82,9 @@ public class Calculadora {
         
         //Cria duas variais de controle
         String aux, auxAnterior = "";
-
+        
         while (!exprlnfixada.estaVazia()) {
+
             //Remove um item da fila em parametro
             aux = exprlnfixada.retirar();
             

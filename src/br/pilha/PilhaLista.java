@@ -4,6 +4,10 @@ import br.encadeamento.NoLista;
 import br.encadeamento.ListaEncadeada;
 
 
+/**
+ * @author Carlos Henrique Ponciano da Silva && Vinícius Luis da Silva
+ */
+
 public class PilhaLista<T> implements Pilha<T>{
     private ListaEncadeada<T> lista = new ListaEncadeada<>();
     

@@ -1,8 +1,7 @@
 package br.encadeamento;
 
 /**
- *
- * @author Carlos Henrique Ponciano da Silva
+ * @author Carlos Henrique Ponciano da Silva && Vinícius Luis da Silva
  */
 
 public class ListaEncadeada<T> {
