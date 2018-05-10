@@ -5,6 +5,7 @@
  */
 package br.gui;
 
+import br.fila.FilaLista;
 import br.vo.Calculadora;
 
 /**
@@ -94,7 +95,9 @@ public class Apresentacao extends javax.swing.JFrame {
     private void btn_calcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_calcularActionPerformed
         
         Calculadora c = new Calculadora();
-        c.gerarExprPosfixada(c.extrairTermos(tf_expressao.getText()));
+        FilaLista   f = new FilaLista();
+        f = c.gerarExprPosfixada(c.extrairTermos(tf_expressao.getText()));
+        System.out.println(f.toString());
         
     }//GEN-LAST:event_btn_calcularActionPerformed
 
