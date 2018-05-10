@@ -126,7 +126,28 @@ public class Calculadora {
     }
 
     public double calcularExprPosfixada(FilaLista<String> exprPosfixada) {
+        //Criei um metodo para calcular
+        
         return Double.MIN_VALUE;
     }
-
+    
+    private double calcular(double v1, double v2, String operador){
+        Operacao op = null;
+        switch(operador){
+            case "+":
+                op = new Adicao();
+                break;
+            case "-":
+                op = new Subtracao();
+                break;
+            case "/":
+                op = new Divisao();
+                break;
+            case "*":
+                op = new Multiplicacao();
+                break;
+        }
+        
+        return op.calcular(v1, v2);
+    }
 }
