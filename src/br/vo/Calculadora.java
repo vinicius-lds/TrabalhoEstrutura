@@ -3,6 +3,8 @@ package br.vo;
 import br.fila.FilaLista;
 import br.pilha.PilhaLista;
 import java.awt.List;
+import java.text.NumberFormat;
+import java.text.ParseException;
 import java.util.regex.Pattern;
 
 /**
@@ -74,7 +76,7 @@ public class Calculadora {
         return c == '+' || c == '-' || c == '*' || c == '/';
     }
 
-    public FilaLista<String> gerarExprPosfixada(FilaLista<String> exprlnfixada) {
+    public FilaLista<String> gerarExprPosfixada(FilaLista<String> exprlnfixada) throws ParseException {
         
         //Instancia as Listas
         FilaLista<String> fila = new FilaLista<>();
@@ -93,7 +95,7 @@ public class Calculadora {
             //um operador caso não seja inserer um operador de multiplicação
             //na pilha.
             if (((aux.length() == 1) && isOperador(aux.charAt(0))) || aux.equals("(")) {
-                if (!(auxAnterior.isEmpty()) && (aux.equals("(")) && !((auxAnterior.length() == 1) && isOperador(auxAnterior.charAt(0)))) {
+                if (!(auxAnterior.isEmpty()) && !(fila.estaVazia()) && (aux.equals("(")) && !((auxAnterior.length() == 1) && isOperador(auxAnterior.charAt(0)))) {
                     pilha.push("*");
                 }
                 pilha.push(aux);
@@ -109,7 +111,19 @@ public class Calculadora {
                             fila.inserir(aux);
                         }
                     }
+                    aux = ")";
                 } else {
+                    //Verifica se é numero negativo, se for elimina os parenteses
+                    if(NumberFormat.getInstance().parse(aux).doubleValue() < 0){
+                        pilha.pop();//remove a abertura (
+                        exprlnfixada.retirar();//remove o fechamento )
+                    }
+                    
+                    //Verifica se não é numero sem operação depois do fecha parenteses
+                    if(auxAnterior.equals(")")){
+                        pilha.push("*");
+                    }
+                    
                     fila.inserir(aux);
                 }
             }
@@ -122,6 +136,7 @@ public class Calculadora {
             fila.inserir(pilha.pop());
         }
         
+        System.out.println(fila.toString());
         return fila;
     }
 

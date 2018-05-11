@@ -7,6 +7,9 @@ package br.gui;
 
 import br.fila.FilaLista;
 import br.vo.Calculadora;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * @author Carlos Henrique Ponciano da Silva && Vinícius Luis da Silva
@@ -93,11 +96,15 @@ public class Apresentacao extends javax.swing.JFrame {
 
     private void btn_calcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_calcularActionPerformed
         
-        Calculadora c = new Calculadora();
-        Double d;
-        d = c.calcularExprPosfixada(c.gerarExprPosfixada(
-                                    c.extrairTermos(tf_expressao.getText())));
-        System.out.println(d);
+        try {
+            Calculadora c = new Calculadora();
+            Double d;
+            d = c.calcularExprPosfixada(c.gerarExprPosfixada(
+                    c.extrairTermos(tf_expressao.getText())));
+            tf_resultado.setText(String.valueOf(d));
+        } catch (ParseException ex) {
+            Logger.getLogger(Apresentacao.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }//GEN-LAST:event_btn_calcularActionPerformed
 
