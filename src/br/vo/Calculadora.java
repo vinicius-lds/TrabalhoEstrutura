@@ -93,7 +93,7 @@ public class Calculadora {
             //Verifica se é um operado ou parenteses para , 
             //caso seja um parenteses verifica se o anterior é 
             //um operador caso não seja inserer um operador de multiplicação
-            //na pilha.
+            //na pilha
             if (((aux.length() == 1) && isOperador(aux.charAt(0))) || aux.equals("(")) {
                 if (!(auxAnterior.isEmpty()) && !(fila.estaVazia()) && (aux.equals("(")) && !((auxAnterior.length() == 1) && isOperador(auxAnterior.charAt(0)))) {
                     pilha.push("*");
@@ -148,18 +148,19 @@ public class Calculadora {
     
     private double calcular(double v1, double v2, String operador){
         Operacao op = null;
+        
         switch(operador){
             case "+":
-                op = new Adicao();
+                op = Adicao.getInstance();
                 break;
             case "-":
-                op = new Subtracao();
+                op = Subtracao.getInstance();
                 break;
             case "/":
-                op = new Divisao();
+                op = Divisao.getInstance();
                 break;
             case "*":
-                op = new Multiplicacao();
+                op = Multiplicacao.getInstance();
                 break;
         }
         
