@@ -141,9 +141,34 @@ public class Calculadora {
     }
 
     public double calcularExprPosfixada(FilaLista<String> exprPosfixada) {
-        //Criei um metodo para calcular
+        //Cria variavei auxiliares e pilha de operandos
+        PilhaLista<Double> operandos  = new PilhaLista<>();
+        String strAux;
+        double doubleAux;
         
-        return Double.MIN_VALUE;
+        //Percorre a FilaLista passada como paramentro
+        while(!exprPosfixada.estaVazia()) {
+            
+            //Retira um elemento da Fila
+            strAux = exprPosfixada.retirar();
+            
+            //Ver se o elemento é operador
+            if((isOperador(strAux.charAt(0))) && strAux.length() == 1) {
+            
+                //Caso for passa ele e os dois ultimos elemento da Pilha pro método calcular
+                //E coloca o resultado de volta na pilha
+                doubleAux = operandos.pop();
+                operandos.push(this.calcular(operandos.pop(), doubleAux, strAux));
+            } else {
+                
+                //Se não for só coloca o elemento, que presumidamente é um número
+                //na pilha de operandos
+                operandos.push(Double.parseDouble(strAux.replace(',', '.')));
+            }
+        }
+        
+        //retorna o elemento restante da pilha, que é o resultado final
+        return operandos.pop();
     }
     
     private double calcular(double v1, double v2, String operador){
