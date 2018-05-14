@@ -40,7 +40,7 @@ public class Apresentacao extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        tf_expressao.setText("1 + (5(2,5 + (-1) / (2* 5))) -2");
+        tf_expressao.setText("2+(10*(5-5)+2)");
 
         tf_resultado.setEditable(false);
 
@@ -96,16 +96,12 @@ public class Apresentacao extends javax.swing.JFrame {
 
     private void btn_calcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_calcularActionPerformed
         
-        try {
-            Calculadora c = new Calculadora();
-            Double d;
-            d = c.calcularExprPosfixada(c.gerarExprPosfixada(
-                    c.extrairTermos(tf_expressao.getText())));
-            tf_resultado.setText(String.valueOf(d));
-        } catch (ParseException ex) {
-            Logger.getLogger(Apresentacao.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
+        Calculadora c = new Calculadora();
+        Double d;
+        d = c.calcularExprPosfixada(c.gerarExprPosfixada(
+                  c.extrairTermos(tf_expressao.getText())));
+        tf_resultado.setText(String.valueOf(d));
+                
     }//GEN-LAST:event_btn_calcularActionPerformed
 
     /**

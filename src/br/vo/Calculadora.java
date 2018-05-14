@@ -2,10 +2,7 @@ package br.vo;
 
 import br.fila.FilaLista;
 import br.pilha.PilhaLista;
-import java.awt.List;
-import java.text.NumberFormat;
-import java.text.ParseException;
-import java.util.regex.Pattern;
+import javax.swing.JOptionPane;
 
 /**
  * @author Carlos Henrique Ponciano da Silva && Vinícius Luis da Silva
@@ -75,15 +72,25 @@ public class Calculadora {
     private boolean isOperador(char c) {
         return c == '+' || c == '-' || c == '*' || c == '/';
     }
+    
+    private int procedenciaOperador(char c){
+        if(c == '/' || c == '*'){     
+            return 3;
+        }
+        if(c == '+' || c == '-'){
+            return 2;
+        }
+        return 1;
+    }
 
-    public FilaLista<String> gerarExprPosfixada(FilaLista<String> exprlnfixada) throws ParseException {
+    public FilaLista<String> gerarExprPosfixada(FilaLista<String> exprlnfixada) {
         
         //Instancia as Listas
         FilaLista<String> fila = new FilaLista<>();
         PilhaLista<String> pilha = new PilhaLista<>();
         
         //Cria duas variais de controle
-        String aux, auxAnterior = "";
+        String aux, subAux;
         
         while (!exprlnfixada.estaVazia()) {
 
@@ -94,49 +101,52 @@ public class Calculadora {
             //caso seja um parenteses verifica se o anterior é 
             //um operador caso não seja inserer um operador de multiplicação
             //na pilha
-            if (((aux.length() == 1) && isOperador(aux.charAt(0))) || aux.equals("(")) {
-                if (!(auxAnterior.isEmpty()) && !(fila.estaVazia()) && (aux.equals("(")) && !((auxAnterior.length() == 1) && isOperador(auxAnterior.charAt(0)))) {
-                    pilha.push("*");
-                }
+            if(aux.equals("(")){
+                
                 pilha.push(aux);
+                
+            }
+            else if (((aux.length() == 1) && isOperador(aux.charAt(0)))) {
+                
+                while(!pilha.estaVazia() && procedenciaOperador(pilha.peek().charAt(0)) >= procedenciaOperador(aux.charAt(0))){
+                    fila.inserir(pilha.pop());
+                }
+                
+                pilha.push(aux); 
+                
             }
             //Verifica se é um fechar de parenteses, 
             //caso seja remove itens da pilha até achar um abrir e, caso não seja
             //inseri na fila
             else {
                 if (aux.equals(")")) {
-                    while (!pilha.estaVazia()) {
-                        aux = pilha.pop();
-                        if (!aux.equals("(")) {
-                            fila.inserir(aux);
-                        }
+                    
+                    while (!pilha.estaVazia() && !(aux = pilha.pop()).equals("(")) {
+                        fila.inserir(aux);
                     }
-                    aux = ")";
+                    
                 } else {
+                    
                     //Verifica se é numero negativo, se for elimina os parenteses
-                    if(NumberFormat.getInstance().parse(aux).doubleValue() < 0){
+                    if(Double.parseDouble(aux.replace(',', '.')) < 0){
                         pilha.pop();//remove a abertura (
                         exprlnfixada.retirar();//remove o fechamento )
-                    }
-                    
-                    //Verifica se não é numero sem operação depois do fecha parenteses
-                    if(auxAnterior.equals(")")){
-                        pilha.push("*");
-                    }
-                    
+                    }                    
                     fila.inserir(aux);
+                    
                 }
             }
-            //Atribui o aux atual para anterior
-            auxAnterior = aux;
         }
         
         //Remove os ultimos elementos da pilha e insere na fila
         while (!pilha.estaVazia()) {
-            fila.inserir(pilha.pop());
+            subAux = pilha.pop();
+            if(!subAux.equals("(")){
+                fila.inserir(subAux);
+            }
         }
         
-        System.out.println(fila.toString());
+        JOptionPane.showMessageDialog(null, fila.toString());
         return fila;
     }
 
